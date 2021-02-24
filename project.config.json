@@ -2,9 +2,9 @@
   "miniprogramRoot": "dist/",
   "projectname": "x-wisdom-platform-jxau",
   "description": "智慧江农平台",
-  "appid": "touristappid",
+  "appid": "wx2cd1f48801713f24",
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": false,
     "enhance": false,
     "postcss": false,
@@ -23,7 +23,7 @@
     "compileHotReLoad": false,
     "useMultiFrameRuntime": true,
     "useApiHook": true,
-    "useApiHostProcess": false,
+    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -40,5 +40,24 @@
     "minifyWXSS": true
   },
   "compileType": "miniprogram",
-  "condition": {}
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/Mine/index",
+          "pathName": "pages/Mine/index",
+          "scene": null
+        }
+      ]
+    }
+  }
 }
