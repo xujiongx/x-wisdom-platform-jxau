@@ -1,5 +1,10 @@
 export default {
-  pages: ["pages/Square/index", "pages/Find/index", "pages/Mine/index"],
+  pages: [
+    "pages/Square/index",
+    "pages/Find/index",
+    "pages/Mine/index",
+    "pages/Login/index",
+  ],
   window: {
     backgroundTextStyle: "light",
     navigationBarBackgroundColor: "#fff",
