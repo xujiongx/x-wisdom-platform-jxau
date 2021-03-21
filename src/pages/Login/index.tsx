@@ -1,7 +1,10 @@
 import Taro from "@tarojs/taro";
+import moment from 'moment'
 import React, { useEffect } from "react";
 import { Button, View } from "@tarojs/components";
 import "./index.less";
+
+
 
 export default function Login() {
   useEffect(() => {
@@ -32,6 +35,8 @@ export default function Login() {
   const getUserInfo = (e: any) => {
     const userInfo = e.detail.userInfo;
     userInfo.openid = Taro.getStorageSync("openid");
+    userInfo.createTime=moment().unix()
+    Taro.setStorageSync('userInfo',userInfo)
     console.log(userInfo);
     Taro.request({
       url: "http://localhost:3000/auth/login",
@@ -45,8 +50,7 @@ export default function Login() {
   };
   return (
     <View>
-      <View>Hello Word</View>
-      <Button openType="getUserInfo" onGetUserInfo={getUserInfo}>
+      <Button openType='getUserInfo' onGetUserInfo={getUserInfo}>
         微信授权
       </Button>
     </View>

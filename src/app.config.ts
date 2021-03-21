@@ -4,6 +4,9 @@ export default {
     "pages/Find/index",
     "pages/Mine/index",
     "pages/Login/index",
+    "pages/Second/ArticleCreate/index",
+    "pages/Second/ArticleInfo/index",
+    "pages/Second/ArticleList/index",
   ],
   window: {
     backgroundTextStyle: "light",
