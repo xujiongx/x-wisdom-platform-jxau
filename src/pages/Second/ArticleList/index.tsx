@@ -31,7 +31,7 @@ export default function ArticleInfo() {
   };
 
   return (
-    <View>
+    <View className='article_list_layout'>
       <RadioGroup onChange={handleTypeChange}>
         <Radio value="news">动态文章</Radio>
         <Radio value="lost">失物招领</Radio>

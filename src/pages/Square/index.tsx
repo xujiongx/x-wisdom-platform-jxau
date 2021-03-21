@@ -1,7 +1,10 @@
-import React, { useEffect } from "react";
-import { View } from "@tarojs/components";
+import React, { useEffect, useState } from "react";
+import Taro from '@tarojs/taro'
+import { Radio, RadioGroup, View } from "@tarojs/components";
 import Swiper from "@components/swiper";
-
+import { Article } from "@interface";
+import { BASE_URL } from "@const";
+import ArticleItem from "@components/articleItem";
 import "./index.less";
 
 const imgUrlList = [
@@ -24,13 +27,44 @@ const imgUrlList = [
 ];
 
 export default function Mine() {
+  const [articleList, setArticleList] = useState<Article[]>([] as any);
+  const [type, setType] = useState("news");
+  useEffect(() => {
+    Taro.request({
+      url: `${BASE_URL}/article/findByType`,
+      method: "GET",
+      data: { type },
+    }).then((res) => {
+      console.log(res, res.data);
+      setArticleList(res.data);
+    });
+  }, [type]);
+
+  const handleTypeChange = (e) => {
+    const value = e.target.value;
+    setType(value);
+  };
   useEffect(() => {
     console.log("唧唧咋咋广场");
   }, []);
   return (
     <View>
-      <Swiper data={imgUrlList} />
-      <View>唧唧咋咋广场</View>
+      <View>
+        <Swiper data={imgUrlList} />
+        <View>唧唧咋咋广场</View>
+      </View>
+      <View>
+        <RadioGroup onChange={handleTypeChange}>
+          <Radio value="news">动态文章</Radio>
+          <Radio value="lost">失物招领</Radio>
+          <Radio value="trade">二手交易</Radio>
+        </RadioGroup>
+        {articleList.map((article) => (
+          <View key={article._id}>
+            <ArticleItem article={article} />
+          </View>
+        ))}
+      </View>
     </View>
   );
 }
