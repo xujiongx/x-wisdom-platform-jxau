@@ -54,13 +54,13 @@ export default function ArticleCreate() {
         type="text"
         value={title}
         placeholder="请输入标题"
-        onBlur={handleTitleChange}
-        style={{ margin: "20rpx 10rpx" }}
+        onInput={handleTitleChange}
+        style={{ margin: "20rpx 10rpx" ,border:'1px soild black'}}
       ></Input>
       <Textarea
         placeholder="请输入内容"
         value={context}
-        onBlur={handleContextChange}
+        onInput={handleContextChange}
         style={{ margin: "20rpx 10rpx" }}
       ></Textarea>
       <RadioGroup
@@ -73,8 +73,6 @@ export default function ArticleCreate() {
         <Radio value="lost">失物招领</Radio>
         <Radio value="trade">二手交易</Radio>
       </RadioGroup>
-      <View>{title}</View>
-      <View>{context}</View>
       <Button onClick={onSubmit}>创建</Button>
     </View>
   );

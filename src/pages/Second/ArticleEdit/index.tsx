@@ -1,6 +1,6 @@
 import Taro, { useRouter } from "@tarojs/taro";
 import React, { useEffect, useState } from "react";
-import { Button, Input, Textarea, View } from "@tarojs/components";
+import { Button, Input, Label, Textarea, View } from "@tarojs/components";
 import "./index.less";
 import { BASE_URL } from "@const";
 import { Article } from "@interface";
@@ -40,21 +40,18 @@ export default function ArticleCreate() {
     });
   };
   return (
-    <View>
+    <View className="article_edit_layout">
       <Input
         type="text"
         value={article.title}
         placeholder="请输入标题"
-        onBlur={handleTitleChange}
+        onInput={handleTitleChange}
       ></Input>
       <Textarea
         placeholder="请输入内容"
         value={article.context}
-        onBlur={handleContextChange}
+        onInput={handleContextChange}
       ></Textarea>
-
-      <View>{article.title}</View>
-      <View>{article.context}</View>
       <Button onClick={onSubmit}>保存</Button>
     </View>
   );

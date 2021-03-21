@@ -1,9 +1,9 @@
 import Taro, { useRouter } from "@tarojs/taro";
 import { Article } from "@interface/index";
-import ArticleItem from "@components/articleItem";
 import { BASE_URL } from "@const";
 import React, { useEffect, useState } from "react";
-import { View, Button } from "@tarojs/components";
+import moment from "moment";
+import { View, Button, Image, Text } from "@tarojs/components";
 import "./index.less";
 
 export default function ArticleInfo() {
@@ -55,8 +55,36 @@ export default function ArticleInfo() {
   }, [id]);
 
   return (
-    <View>
-      <ArticleItem article={article}></ArticleItem>
+    <View className="article_info_layout">
+      <View style={{ margin: "20rpx 10rpx" }}>
+        <View
+          style={{
+            display: "flex",
+            justifyContent: "start",
+          }}
+        >
+          <Image
+            style={{ width: "88rpx", height: "88rpx" }}
+            src={article.author?.avatarUrl}
+          ></Image>
+          <View>{article.author?.nickName}</View>
+        </View>
+        <View>
+          <View>标题：{article.title}</View>
+          <View>
+            内容：<Text>{article.context}</Text>
+          </View>
+        </View>
+        <View>
+          <View>
+            创建时间：
+            {moment
+              .unix(Number(article.createTime))
+              .format("YYYY-MM-DD hh:m:ss") || ""}
+          </View>
+        </View>
+      </View>
+
       <View>
         <Button onClick={articleFix}>修改</Button>
         <Button onClick={articleDelete}>删除</Button>
