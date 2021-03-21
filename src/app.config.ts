@@ -7,6 +7,8 @@ export default {
     "pages/Second/ArticleCreate/index",
     "pages/Second/ArticleInfo/index",
     "pages/Second/ArticleList/index",
+    "pages/Second/ArticleEdit/index",
+
   ],
   window: {
     backgroundTextStyle: "light",

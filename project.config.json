@@ -87,6 +87,14 @@
 					"id": -1,
 					"name": "pages/ArticleInfo/index",
 					"pathName": "/pages/ArticleInfo/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/Second/ArticleList/index",
+					"pathName": "pages/Second/ArticleList/index",
+					"query": "",
 					"scene": null
 				}
 			]

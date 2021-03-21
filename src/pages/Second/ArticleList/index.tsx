@@ -1,49 +1,42 @@
 import Taro, { useRouter } from "@tarojs/taro";
-import ArticleItem from "../../../components/articleItem";
+import { BASE_URL } from "@const";
+import ArticleItem from "@components/articleItem";
 import moment from "moment";
+
 import React, { useEffect, useState } from "react";
-import { View, Image } from "@tarojs/components";
+import { View, Image, RadioGroup, Radio } from "@tarojs/components";
 import "./index.less";
-
-interface User {
-  readonly avatarUrl: string;
-  readonly city: string;
-  readonly country: string;
-  readonly gender: string;
-  readonly language: string;
-  readonly nickName: string;
-  readonly openid: string;
-  readonly province: string;
-  readonly createTime: string;
-}
-
-interface Article {
-  readonly _id: string;
-  readonly title: string;
-  readonly context: string;
-  readonly type: string;
-  readonly createTime: string;
-  readonly author: User;
-}
+import { Article } from "@interface/index";
 
 export default function ArticleInfo() {
   const openid = Taro.getStorageSync("openid");
 
   const [articleList, setArticleList] = useState<Article[]>([] as any);
+  const [type, setType] = useState("news");
 
   useEffect(() => {
     Taro.request({
-      url: "http://localhost:3000/article/findByOpenid",
+      url: `${BASE_URL}/article/findByOpenid`,
       method: "GET",
-      data: { openid },
+      data: { openid, type },
     }).then((res) => {
       console.log(res, res.data);
       setArticleList(res.data);
     });
-  }, [openid]);
+  }, [openid, type]);
+
+  const handleTypeChange = (e) => {
+    const value = e.target.value;
+    setType(value);
+  };
 
   return (
     <View>
+      <RadioGroup onChange={handleTypeChange}>
+        <Radio value="news">动态文章</Radio>
+        <Radio value="lost">失物招领</Radio>
+        <Radio value="trade">二手交易</Radio>
+      </RadioGroup>
       {articleList.map((article) => (
         <View key={article._id}>
           <ArticleItem article={article} />
