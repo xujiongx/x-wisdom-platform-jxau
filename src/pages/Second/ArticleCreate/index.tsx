@@ -55,7 +55,7 @@ export default function ArticleCreate() {
         value={title}
         placeholder="请输入标题"
         onInput={handleTitleChange}
-        style={{ margin: "20rpx 10rpx" ,border:'1px soild black'}}
+        style={{ margin: "20rpx 10rpx", border: "1px soild black" }}
       ></Input>
       <Textarea
         placeholder="请输入内容"
