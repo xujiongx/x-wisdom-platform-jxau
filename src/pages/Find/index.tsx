@@ -1,79 +1,73 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { View, Button, Text } from '@tarojs/components'
+import Taro, { useDidShow } from "@tarojs/taro";
 
-import { add, minus, asyncAdd } from '../../actions/counter'
+import React, { useEffect, useState } from "react";
+import { View, Image, Text } from "@tarojs/components";
 
-import './index.less'
+import "./index.less";
+import { Article } from "@interface";
+import { BASE_URL } from "@const";
+import ArticleItem from "@components/articleItem";
 
-// #region 书写注意
-//
-// 目前 typescript 版本还无法在装饰器模式下将 Props 注入到 Taro.Component 中的 props 属性
-// 需要显示声明 connect 的参数类型并通过 interface 的方式指定 Taro.Component 子类的 props
-// 这样才能完成类型检查和 IDE 的自动提示
-// 使用函数模式则无此限制
-// ref: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/20796
-//
-// #endregion
+export default function Index() {
+  const [loveList, setLoveList] = useState<Article[]>([]);
+  const [reviewList, setReviewList] = useState<Article[]>([]);
 
-type PageStateProps = {
-  counter: {
-    num: number
-  }
-}
-
-type PageDispatchProps = {
-  add: () => void
-  dec: () => void
-  asyncAdd: () => any
-}
-
-type PageOwnProps = {}
-
-type PageState = {}
-
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
-
-interface Index {
-  props: IProps;
-}
-
-@connect(({ counter }) => ({
-  counter
-}), (dispatch) => ({
-  add () {
-    dispatch(add())
-  },
-  dec () {
-    dispatch(minus())
-  },
-  asyncAdd () {
-    dispatch(asyncAdd())
-  }
-}))
-class Index extends Component {
-  componentWillReceiveProps (nextProps) {
-    console.log(this.props, nextProps)
-  }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
-  render () {
-    return (
-      <View className='index'>
-        <Button className='add_btn' onClick={this.props.add}>+</Button>
-        <Button className='dec_btn' onClick={this.props.dec}>-</Button>
-        <Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>
-        <View><Text>{this.props.counter.num}</Text></View>
-        <View><Text>Hello, World</Text></View>
+  useDidShow(() => {
+    Taro.request({
+      url: `${BASE_URL}/article/sortByLove`,
+    }).then((res) => {
+      setLoveList(res.data);
+    });
+    Taro.request({
+      url: `${BASE_URL}/article/sortByReviewSize`,
+    }).then((res) => {
+      setReviewList(res.data);
+    });
+  });
+  return (
+    <View>
+      <View className="module">
+        <View>江农掠影</View>
+        <View>
+          <Image src="https://cdn.nlark.com/yuque/0/2021/jpeg/529418/1617298396135-40c26a1d-8c82-4baf-957f-6026a044a90b.jpeg"></Image>
+          <View>江农新校门正式开放</View>
+        </View>
       </View>
-    )
-  }
+      <View className="module">
+        <View>江农美食</View>
+        <View>
+          <Image src="https://cdn.nlark.com/yuque/0/2021/jpeg/529418/1617298547330-d52adeba-387a-4cee-906c-9f2232cebf04.jpeg?x-oss-process=image/auto-orient,1"></Image>
+          <View>江农杨腾干锅鹅，大家都吃过。</View>
+        </View>
+      </View>
+      <View className="module">
+        <View>江农快报</View>
+        <View>
+          <View>56色油菜花荣登头条，大家快来围观。</View>
+          <View>56色油菜花荣登头条，大家快来围观。</View>
+          <View>56色油菜花荣登头条，大家快来围观。</View>
+        </View>
+      </View>
+      <View className="module">
+        <View>热评</View>
+        <View>
+          {reviewList?.map((article) => (
+            <View key={article._id}>
+              <ArticleItem article={article} />
+            </View>
+          ))}
+        </View>
+      </View>
+      <View className="module">
+        <View>大家最爱</View>
+        <View>
+          {loveList?.map((article) => (
+            <View key={article._id}>
+              <ArticleItem article={article} />
+            </View>
+          ))}
+        </View>
+      </View>
+    </View>
+  );
 }
-
-export default Index
-

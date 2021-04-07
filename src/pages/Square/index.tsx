@@ -44,14 +44,10 @@ export default function Mine() {
     const value = e.target.value;
     setType(value);
   };
-  useEffect(() => {
-    console.log("唧唧咋咋广场");
-  }, []);
   return (
     <View>
       <View>
         <Swiper data={imgUrlList} />
-        <View>唧唧咋咋广场</View>
       </View>
       <View>
         <RadioGroup onChange={handleTypeChange}>

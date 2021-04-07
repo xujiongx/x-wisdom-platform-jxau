@@ -1,6 +1,6 @@
 import Taro, { useDidShow } from "@tarojs/taro";
 import React, { useState } from "react";
-import { Button, View } from "@tarojs/components";
+import { Button, OpenData, View } from "@tarojs/components";
 import "./index.less";
 
 export default function Mine() {
@@ -24,6 +24,8 @@ export default function Mine() {
   };
   return (
     <View>
+      <OpenData type='userNickName' />
+      <OpenData type='userAvatarUrl' />
       {!userId ? (
         <Button onClick={login}>登录</Button>
       ) : (

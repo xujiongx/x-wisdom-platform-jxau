@@ -96,6 +96,13 @@
 					"pathName": "pages/Second/ArticleList/index",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/Find/index",
+					"pathName": "pages/Find/index",
+					"query": "",
+					"scene": null
 				}
 			]
 		}
