@@ -96,7 +96,7 @@ export default function ArticleItem(props: Props) {
               placeholder="请输入评论"
               value={reviewContext}
               onInput={handleContextChange}
-              style={{ margin: "20rpx 10rpx" }}
+              style={{ width:'100%',margin: "20rpx 10rpx" }}
             ></Textarea>
             <Button onClick={handleReview}>评论</Button>
           </View>

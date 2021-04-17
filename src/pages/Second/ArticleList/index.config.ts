@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: '文章详情'
+  navigationBarTitleText: '我的文章'
 }

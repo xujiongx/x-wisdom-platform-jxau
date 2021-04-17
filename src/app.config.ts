@@ -8,7 +8,8 @@ export default {
     "pages/Second/ArticleInfo/index",
     "pages/Second/ArticleList/index",
     "pages/Second/ArticleEdit/index",
-
+    "pages/Admin/index",
+    "pages/ToolBox/index",
   ],
   window: {
     backgroundTextStyle: "light",

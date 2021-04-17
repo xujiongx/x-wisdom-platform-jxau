@@ -1,6 +1,6 @@
 import Taro, { useRouter } from "@tarojs/taro";
 import React, { useEffect, useState } from "react";
-import { Button, Input, Label, Textarea, View } from "@tarojs/components";
+import { Button, Input, Textarea, View } from "@tarojs/components";
 import "./index.less";
 import { BASE_URL } from "@const";
 import { Article } from "@interface";
@@ -48,6 +48,7 @@ export default function ArticleCreate() {
         onInput={handleTitleChange}
       ></Input>
       <Textarea
+        style={{ width: "100%" }}
         placeholder="请输入内容"
         value={article.context}
         onInput={handleContextChange}

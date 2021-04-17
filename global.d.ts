@@ -9,6 +9,10 @@ declare module "*.scss";
 declare module "*.sass";
 declare module "*.styl";
 
+declare const wx:{
+  [key:string]: any
+}
+
 // @ts-ignore
 declare const process: {
   env: {
