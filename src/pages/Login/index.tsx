@@ -3,6 +3,7 @@ import moment from "moment";
 import React, { useEffect } from "react";
 import { Button, View } from "@tarojs/components";
 import "./index.less";
+import { BASE_URL } from "@const";
 
 export default function Login() {
   useEffect(() => {
@@ -14,7 +15,7 @@ export default function Login() {
       success: (res) => {
         console.log(res);
         Taro.request({
-          url: "http://localhost:3000/auth/getSession",
+          url: `${BASE_URL}/auth/getSession`,
           method: "GET",
           data: {
             code: res.code,
@@ -40,7 +41,7 @@ export default function Login() {
         Taro.setStorageSync("userInfo", userInfo);
         console.log(userInfo);
         Taro.request({
-          url: "http://localhost:3000/auth/login",
+          url: `${BASE_URL}/auth/login`,
           method: "GET",
           data: { userInfo },
         }).then((resp) => {
