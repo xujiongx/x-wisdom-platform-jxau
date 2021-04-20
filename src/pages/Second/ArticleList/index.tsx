@@ -20,7 +20,6 @@ export default function ArticleInfo() {
       method: "GET",
       data: { openid, type },
     }).then((res) => {
-      console.log(res, res.data);
       setArticleList(res.data);
     });
   }, [openid, type]);

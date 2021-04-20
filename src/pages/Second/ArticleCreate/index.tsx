@@ -1,6 +1,6 @@
 import Taro from "@tarojs/taro";
 import moment from "moment";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Button,
   Input,
@@ -11,11 +11,13 @@ import {
 } from "@tarojs/components";
 import "./index.less";
 import { BASE_URL } from "@const";
+import FileUpload from "@components/fileUpload";
 
 export default function ArticleCreate() {
   const [title, setTitle] = useState("");
   const [context, setContext] = useState("");
   const [type, setType] = useState("news");
+  const [imgUrl, setImageUrl] = useState("");
 
   const handleTitleChange = (e) => {
     const value = e.target.value;
@@ -36,6 +38,7 @@ export default function ArticleCreate() {
       title,
       context,
       type,
+      imgUrl,
       createTime,
       author: Taro.getStorageSync("userInfo"),
     };
@@ -61,8 +64,9 @@ export default function ArticleCreate() {
         placeholder="请输入内容"
         value={context}
         onInput={handleContextChange}
-        style={{ margin: "20rpx 10rpx" }}
+        style={{ width: "100%", margin: "20rpx 10rpx" }}
       ></Textarea>
+      <FileUpload getUrl={(url) => setImageUrl(url)}></FileUpload>
       <RadioGroup
         onChange={handleTypeChange}
         style={{ fontSize: "14px", padding: " 10px 2px" }}

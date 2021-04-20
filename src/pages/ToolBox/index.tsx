@@ -1,6 +1,7 @@
 import { Button, Input, Label, Textarea, View } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import React from "react";
+import FileUpload from "@components/fileUpload";
 import "./index.less";
 
 export default function ToolBox() {
@@ -18,6 +19,9 @@ export default function ToolBox() {
       <View className="module">
         <View>宿舍报修</View>
         <Button size="mini">点击跳转报修界面</Button>
+      </View>
+      <View>
+        <FileUpload></FileUpload>
       </View>
     </View>
   );

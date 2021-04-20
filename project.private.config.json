@@ -1,4 +1,5 @@
 {
+  "setting": {},
   "condition": {
     "plugin": {
       "list": []
@@ -56,6 +57,12 @@
         {
           "name": "pages/Admin/index",
           "pathName": "pages/Admin/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/ToolBox/index",
+          "pathName": "pages/ToolBox/index",
           "scene": null
         }
       ]

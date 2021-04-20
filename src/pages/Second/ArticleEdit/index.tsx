@@ -4,12 +4,14 @@ import { Button, Input, Textarea, View } from "@tarojs/components";
 import "./index.less";
 import { BASE_URL } from "@const";
 import { Article } from "@interface";
+import FileUpload from "@components/fileUpload";
 
 export default function ArticleCreate() {
   const {
     params: { id },
   } = useRouter();
   const [article, setArticle] = useState<Article>({} as any);
+  const [imgUrl, setImageUrl] = useState("");
 
   useEffect(() => {
     Taro.request({
@@ -34,7 +36,7 @@ export default function ArticleCreate() {
     Taro.request({
       url: `${BASE_URL}/article/update`,
       method: "POST",
-      data: { id, ...article },
+      data: { id, ...article, imgUrl },
     }).then((res) => {
       Taro.navigateTo({ url: `/pages/Second/ArticleInfo/index?id=${id}` });
     });
@@ -53,6 +55,7 @@ export default function ArticleCreate() {
         value={article.context}
         onInput={handleContextChange}
       ></Textarea>
+      <FileUpload src={article.imgUrl} getUrl={(url) => setImageUrl(url)}></FileUpload>
       <Button onClick={onSubmit}>保存</Button>
     </View>
   );

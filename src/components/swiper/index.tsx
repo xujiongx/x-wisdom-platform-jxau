@@ -14,8 +14,8 @@ export default function swiper(props) {
       autoplay
     >
       {data.map((item, index) => (
-        <SwiperItem key={index} >
-          <Image src={item.url} style={{width:'100%',height:'100%'}}/>
+        <SwiperItem key={index}>
+          <Image src={item.url} style={{ width: "100%", height: "100%" }} />
         </SwiperItem>
       ))}
     </Swiper>

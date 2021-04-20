@@ -26,7 +26,6 @@ export default function ArticleInfo() {
       content: "是否确认删除这条文章？",
       success: function (res) {
         if (res.confirm) {
-          console.log("用户点击确定");
           Taro.request({
             url: `${BASE_URL}/article/delete`,
             method: "POST",
@@ -51,7 +50,6 @@ export default function ArticleInfo() {
       method: "POST",
       data: { id: article._id },
     }).then((res) => {
-      console.log("praise", res.data.love);
       setArticle(res.data);
     });
   };
@@ -67,7 +65,6 @@ export default function ArticleInfo() {
       method: "POST",
       data: { id: article._id, review },
     }).then((res) => {
-      console.log("review", res.data.review);
       setArticle(res.data);
     });
     setOpenReview(false);
@@ -84,7 +81,6 @@ export default function ArticleInfo() {
       method: "GET",
       data: { id },
     }).then((res) => {
-      console.log(res, res.data);
       setArticle(res.data);
       setIsAuthor(res.data.author.openid == Taro.getStorageSync("openid"));
     });
@@ -110,6 +106,9 @@ export default function ArticleInfo() {
           <View>
             内容：<Text>{article.context}</Text>
           </View>
+          {article.imgUrl && (
+            <Image style={{ width: "100%" }} src={article.imgUrl}></Image>
+          )}
         </View>
         <View>
           <View>
@@ -126,9 +125,11 @@ export default function ArticleInfo() {
           <Button onClick={articleDelete}>删除</Button>
         </View>
       )}
-            <View>
+      <View>
         <Button onClick={handlePraise}>点赞{article.love}</Button>
-        <Button onClick={() => setOpenReview(true)}>评论</Button>
+        <Button onClick={() => setOpenReview(true)}>
+          评论{article.reviewSize}
+        </Button>
         <View>
           {article.review?.map((item, index) => (
             <View key={item._id}>

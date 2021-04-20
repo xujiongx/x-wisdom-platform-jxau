@@ -14,7 +14,8 @@ export default function ArticleItem(props: Props) {
   const { article } = props;
   const [openReview, setOpenReview] = useState(false);
   const [reviewContext, setReviewContext] = useState("");
-  const [love, setLove] = useState("");
+  const [love, setLove] = useState(article.love);
+  const [reviewSize, setReviewSize] = useState(article.reviewSize);
   const [reviews, setReviews] = useState(article.review);
 
   const goArticleInfoById = (id: string) => {
@@ -26,8 +27,8 @@ export default function ArticleItem(props: Props) {
       method: "POST",
       data: { id: article._id },
     }).then((res) => {
-      console.log("praise", res.data.love);
       setLove(res.data.love);
+      setReviewSize(res.data.setReviewSize);
     });
   };
   const handleReview = (e) => {
@@ -42,9 +43,12 @@ export default function ArticleItem(props: Props) {
       method: "POST",
       data: { id: article._id, review },
     }).then((res) => {
-      console.log("review", res.data.review);
       setReviews(res.data.review);
     });
+    setOpenReview(false);
+    setReviewContext("");
+  };
+  const handleReviewClose = () => {
     setOpenReview(false);
   };
   const handleContextChange = (e) => {
@@ -77,7 +81,9 @@ export default function ArticleItem(props: Props) {
       </View>
       <View>
         <Button onClick={handlePraise}>点赞{love || article.love}</Button>
-        <Button onClick={() => setOpenReview(true)}>评论</Button>
+        <Button onClick={() => setOpenReview(true)}>
+          评论{reviewSize || article.reviewSize}
+        </Button>
         <View>
           {reviews.map((item, index) => (
             <View key={item._id}>
@@ -96,9 +102,12 @@ export default function ArticleItem(props: Props) {
               placeholder="请输入评论"
               value={reviewContext}
               onInput={handleContextChange}
-              style={{ width:'100%',margin: "20rpx 10rpx" }}
+              style={{ width: "100%", margin: "20rpx 10rpx" }}
             ></Textarea>
-            <Button onClick={handleReview}>评论</Button>
+            <View style={{ display: "flex" }}>
+              <Button onClick={handleReview}>确定</Button>
+              <Button onClick={handleReviewClose}>取消</Button>
+            </View>
           </View>
         )}
       </View>

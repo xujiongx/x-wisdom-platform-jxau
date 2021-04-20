@@ -35,7 +35,6 @@ export default function Mine() {
       method: "GET",
       data: { type },
     }).then((res) => {
-      console.log(res, res.data);
       setArticleList(res.data);
     });
   }, [type]);
@@ -53,7 +52,7 @@ export default function Mine() {
         <RadioGroup onChange={handleTypeChange}>
           <Radio value="news">动态文章</Radio>
           <Radio value="lost">失物招领</Radio>
-          <Radio value="trade">二手交易</Radio>
+          <Radio value="trade">二手交易</Radio> 
         </RadioGroup>
         {articleList.map((article) => (
           <View key={article._id}>

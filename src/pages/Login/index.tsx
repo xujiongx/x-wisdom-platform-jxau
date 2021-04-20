@@ -1,7 +1,7 @@
 import Taro from "@tarojs/taro";
 import moment from "moment";
 import React, { useEffect } from "react";
-import { Button, View } from "@tarojs/components";
+import { Button, Input, View } from "@tarojs/components";
 import "./index.less";
 import { BASE_URL } from "@const";
 
@@ -13,7 +13,6 @@ export default function Login() {
   const getSessions = () => {
     Taro.login({
       success: (res) => {
-        console.log(res);
         Taro.request({
           url: `${BASE_URL}/auth/getSession`,
           method: "GET",
@@ -39,13 +38,11 @@ export default function Login() {
         userInfo.openid = Taro.getStorageSync("openid");
         userInfo.createTime = moment().unix();
         Taro.setStorageSync("userInfo", userInfo);
-        console.log(userInfo);
         Taro.request({
           url: `${BASE_URL}/auth/login`,
           method: "GET",
           data: { userInfo },
         }).then((resp) => {
-          console.log(resp.data.data.userId);
           Taro.setStorageSync("userId", resp.data.data.userId);
           Taro.switchTab({ url: "/pages/Mine/index" });
         });
@@ -54,6 +51,7 @@ export default function Login() {
   };
   return (
     <View>
+      学号：<Input></Input>
       <Button onClick={getUserInfo}>
         微信授权
       </Button>

@@ -37,7 +37,6 @@ export default function Mine() {
       method: "GET",
       data: { openid },
     }).then((res) => {
-      console.log(1122, res.data.data);
       setIsAdimin(res.data.data.isAdmin);
     });
   }, []);
