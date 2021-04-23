@@ -63,6 +63,12 @@
         {
           "name": "pages/ToolBox/index",
           "pathName": "pages/ToolBox/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/Admin/index",
+          "pathName": "pages/Admin/index",
           "scene": null
         }
       ]

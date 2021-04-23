@@ -42,19 +42,45 @@ export default function Mine() {
   }, []);
   return (
     <View>
-      <OpenData type="userNickName" />
-      <OpenData type="userAvatarUrl" />
-      {!userId ? (
-        <Button onClick={login}>登录</Button>
-      ) : (
+      <View style={{ display: "flex" }}>
+        <OpenData type="userAvatarUrl" />
         <View>
-          <Button onClick={goCreateArticle}>添加文章</Button>
-          <Button onClick={goArticleList}>我的文章</Button>
-          {isAdmin && <Button onClick={goAdminPage}>管理员页面</Button>}
-          <Button onClick={goToolBox}>工具箱</Button>
-          <Button onClick={loginOut}>登出</Button>
+          <View>
+            昵称：
+            <OpenData type="userNickName" />
+          </View>
+          <View>
+            性别：
+            <OpenData type="userGender" />
+          </View>
+          <View>
+            地区：
+            <OpenData type="userProvince" />
+            <OpenData type="userCity" />
+          </View>
+          <View>
+            语言：
+            <OpenData type="userLanguage" />
+          </View>
         </View>
-      )}
+      </View>
+
+      <View>
+        功能
+        <View>
+          {!userId ? (
+            <Button onClick={login}>登录</Button>
+          ) : (
+            <View>
+              <Button onClick={goCreateArticle}>添加文章</Button>
+              <Button onClick={goArticleList}>我的文章</Button>
+              {isAdmin && <Button onClick={goAdminPage}>管理员页面</Button>}
+              <Button onClick={goToolBox}>工具箱</Button>
+              <Button onClick={loginOut}>登出</Button>
+            </View>
+          )}
+        </View>
+      </View>
     </View>
   );
 }
