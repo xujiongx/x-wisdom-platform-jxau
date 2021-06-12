@@ -10,6 +10,7 @@ export default {
     "pages/Second/ArticleEdit/index",
     "pages/Admin/index",
     "pages/ToolBox/index",
+    "pages/Other/Canvas/index",
   ],
   window: {
     backgroundTextStyle: "light",

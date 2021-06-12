@@ -31,6 +31,9 @@ export default function Mine() {
   const goToolBox = () => {
     Taro.navigateTo({ url: "/pages/ToolBox/index" });
   };
+  const goCanvas = () => {
+    Taro.navigateTo({ url: "/pages/Other/Canvas/index" });
+  };
   useEffect(() => {
     Taro.request({
       url: `${BASE_URL}/auth/getUserInfo`,
@@ -76,6 +79,7 @@ export default function Mine() {
               <Button onClick={goArticleList}>我的文章</Button>
               {isAdmin && <Button onClick={goAdminPage}>管理员页面</Button>}
               <Button onClick={goToolBox}>工具箱</Button>
+              <Button onClick={goCanvas}>Canvas测试</Button>
               <Button onClick={loginOut}>登出</Button>
             </View>
           )}
